@@ -11,7 +11,7 @@ fregister("function1","6290B0","cdecl");
 and allows you to call it like so:
 fcall("function1", (void*)0, 1000);
 
-I will not release this <i><b>yet</b></i>, but am planning to if this idea is supported..
+I will not release this yet, but am planning to, if this idea is supported..
 
 
 
