@@ -1,6 +1,6 @@
-This is a function wrapping module for DLL's, that works by simulating the calls in x86 ASM.
+This is a function-wrapping module for DLL's, that works by customizing the function call in assembly.
 This way, you can call virtually any function with only its address, and calling convention
-as a string, in an elegant api.
+as a string, in an elegant api. (currently allows you to call up to 12 args)
 This eliminates tedious code such as:
 typedef int(__cdecl *functiontype1)(void* data1, int data2);
 functiontype1 function1 = (functiontype1)0x6290B0;
