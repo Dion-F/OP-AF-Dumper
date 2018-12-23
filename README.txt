@@ -11,8 +11,14 @@ fregister("function1","6290B0","cdecl");
 and allows you to call it like so:
 fcall("function1", (void*)0, 1000);
 
-This project is already complete.
-I will not release this yet, but am planning to, if the idea is supported..
+And for the exploiting community, this means fully auto-updatable exploits,
+as you can retrieve the calling convention and address as a string from your web server.
 
+This project is already complete.
+I will not release this yet, but am planning to, if the idea is supported.
+Lua C addresses will even be supplied from my own web server, to allow for creation of lua
+exploit development for everyone.
+
+Contact me at static#1942
 
 
