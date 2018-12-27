@@ -16,7 +16,8 @@ And for the exploiting community, this means fully auto-updatable exploits,
 as you can retrieve the calling convention and address as a string from your web server.
 
 This project is already complete.
-I will not release this yet, but am planning to, if the idea is supported.
+After peaking at Sk8r's source, I thought, this could easily be stolen, rigged, molested, etc.
+I might not release this yet, but am planning to, if the idea is supported.
 This could completely revolutionize DLL's and exploiting.
 Lua C addresses will even be supplied from my own web server, to allow for creation of lua
 exploit development for everyone.
