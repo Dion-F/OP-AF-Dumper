@@ -1,3 +1,5 @@
+(Updated -- my dumper skipped fastcalls oddly after I updated it)
+
 lua_type                    0x77C420 __cdecl
 lua_touserdata              0x77C3F0 __cdecl
 luaL_register               0x773D80 __cdecl
