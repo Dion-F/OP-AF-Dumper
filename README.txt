@@ -22,9 +22,8 @@ This project is already complete.
 After peaking at Sk8r's source, I thought, this could easily be stolen, rigged, molested, etc.
 I might not release this yet, but am planning to, if the idea is supported.
 This could completely revolutionize DLL's and exploiting.
-Lua C addresses will even be supplied from my own web server, to allow for creation of lua
-exploit development for everyone.
+Lua C addresses will even be supplied weekly, so everyone can develop exploits.
 
-Contact me at static#1942
+Contact me - static#1942
 
 
