@@ -3,14 +3,17 @@ This way, you can call virtually any function with only its address, and optiona
 If you dont provide the calling convention as the string it will automatically determine it.
 You can then call the function with up to 12 args of any value, 32-bit or 64-bit.
 This eliminates tedious code such as:
+
 typedef int(__cdecl *functiontype1)(void* data1, int data2);
 functiontype1 function1 = (functiontype1)0x6290B0;
 
 replacing it with a much simpler:
-fregister("function1","6290B0","cdecl"), or even fregister("function1","6290B0",""); (automatic)
+fregister("function1","6290B0","cdecl")
+or, for automatic calling convention:
+fregister("function1","6290B0","")
 
-and allows you to call it like so:
-fcall("function1", (void*)0, 1000, (arg3), (arg4), . . . .);
+and you can now call it like so:
+fcall("function1", (void*)0, 1000, (arg3), (arg4), (arg5), (arg6), (arg7), (arg8), . . . .);
 
 And for the exploiting community, this means fully auto-updatable exploits,
 as you can retrieve the calling convention and address as a string from your web server.
