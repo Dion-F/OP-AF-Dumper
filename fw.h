@@ -1,3 +1,12 @@
+// Don't forget to give credit to static and PuddingMuggs.
+// He inspired me to get off my bum and finish making this.
+// He is a huge help and an excellent dev, but most of all
+// hes a really good friend
+// and also credit to Cheat Buddy for being a good friend some
+// 3 years ago. He inspired me to do what im doing now.
+// it meant alot that he chose to help teach me.
+// So heres a gift to everybody
+//
 #ifndef STATICS_FUNCTION_WRAPPER
 #define STATICS_FUNCTION_WRAPPER
 #define arg32	int32_t	/* 32 bits */
