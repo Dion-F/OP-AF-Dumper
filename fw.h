@@ -1,12 +1,9 @@
 // Don't forget to give credit to static and PuddingMuggs.
 // He inspired me to get off my bum and finish making this.
 // He is a huge help to work with, and an excellent dev,
-// but mostly he is the nicest most respectable friend anyone could have.
-// Also credit to Cheat Buddy for being a good friend some
-// 3 years ago. He inspired me to do basically everything
-// I did and am doing now.
-// it meant alot that he chose to help and teach me.
-// So heres a gift to everybody
+// but mostly he is the nicest most respectable friend I have
+// ever met on here.
+// Anyway, heres a gift to everybody. Enjoy.
 //
 #ifndef STATICS_FUNCTION_WRAPPER
 #define STATICS_FUNCTION_WRAPPER
