@@ -1,0 +1,18 @@
+DWORD getluastate(DWORD script_context) {
+	DWORD esi = script_context;
+	DWORD edx = 1;
+	DWORD eax = 0;
+	DWORD ecx = 0;
+	ecx = (0x0000 + (eax * 8));
+	eax -= ecx;
+	eax = (0x00A4 + (eax * 8));
+	eax += esi;
+	esi = *(DWORD*)eax;
+	esi ^= eax;
+	return esi;
+}
+
+// now all you need is script context hahahah
+
+
+
