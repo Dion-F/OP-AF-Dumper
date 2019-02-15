@@ -1,25 +1,34 @@
-This is a function-wrapping module for DLL's, that works by producing the function call in assembly.
-This way, you can call virtually any function with only its address, and calling convention** as a string.
+This provides a way to call virtually any function using only an address,
+and a calling convention as a string.
+It allows an infinite number of args.
+Enjoy.
 
-You can then call the function with up to 6 args of any type or value.
-This eliminates tedious code such as:
+Usage:
 
-typedef int(__cdecl *functiontype1)(void* data1, int data2);
-functiontype1 function1 = (functiontype1)0x6290B0;
+// Easily accessible
+f_add(function("r_getfield","stdcall",unprotect(base(0x7D7480))));
+f_get("r_getfield").call({rL, -10002, "game"});
+f_get("r_getfield").call({rL, -1, "Players"});
+f_get("r_getfield").call({rL, -1, "LocalPlayer"});
+f_get("r_getfield").call({rL, -1, "Character"});
+f_get("r_getfield").call({rL, -1, "Humanoid"});
+int t = reinterpret_cast<int>(function("r_type","cdecl",unprotect(base(0x7D9C20)))).call({rL,-1});
+printf("Type of field \"Humanoid\": %i.\n", t);
 
-replacing it with a much simpler:
-fregister("function1",unprotect(aslr(0xABCDEF)),"cdecl")
+// Variable-style
+function r_pushnumber = function("cdecl",unprotect(base(0x7D8740)));
+r_pushnumber.call({rL, 250.0});
 
-and you can now call it like so:
-fget("function1").call((void*)0, 1000, (arg3), (arg4), (arg5), . . .);
+// Make it into a function
+f_add(function("r_setfield","stdcall",unprotect(base(0x7D91E0))));
+auto r_setfield = [](UINT_PTR L,int id,const char* s){
+  f_get("r_setfield").call({L,id,s});
+};
+r_setfield(rL, -2, "WalkSpeed");
 
-Or call the entire function at an address in a single line:
-function(unprotect(aslr(0xABCDEF)),"stdcall").call(arg1, arg2, arg3);
 
-For the exploiting community, this means fully auto-updatable exploits,
-as you can retrieve the calling convention and address as a string
-from your web server.
 
-**Soon I will add a function for auto-determining the calling convention.
-This will be a bonus feature since I'm working on a very secure one.
+
+
+
 
