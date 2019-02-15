@@ -77,8 +77,6 @@ namespace FWRAP {
 					__asm push a32
 			}
 		}
-		// due to the compiler stealing our edx, and to ensure that
-		// this works on all systems, we'll do these here!
 		if (use_ecx_arg){ // set ECX as first arg
 			arg32 a32=args[0].data32;
 			__asm mov ecx,a32
