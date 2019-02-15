@@ -1,6 +1,6 @@
 This provides a way to call virtually any function using only an address,
 and a calling convention as a string.
-It allows an infinite number of args.
+It allows an infinite number of args, of nearly every type possible.
 It can be used for more than just exploiting games.
 Enjoy.
 
