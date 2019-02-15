@@ -1,6 +1,7 @@
 This provides a way to call virtually any function using only an address,
 and a calling convention as a string.
 It allows an infinite number of args.
+It can be used for more than just exploiting games.
 Enjoy.
 
 Usage:
@@ -15,9 +16,11 @@ f_get("r_getfield").call({rL, -1, "Humanoid"});
 int t = reinterpret_cast<int>(function("r_type","cdecl",unprotect(base(0x7D9C20)))).call({rL,-1});
 printf("Type of field \"Humanoid\": %i.\n", t);
 
+
 // Variable-style
 function r_pushnumber = function("cdecl",unprotect(base(0x7D8740)));
 r_pushnumber.call({rL, 250.0});
+
 
 // Make it into a function
 f_add(function("r_setfield","stdcall",unprotect(base(0x7D91E0))));
