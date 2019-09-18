@@ -182,7 +182,7 @@ int main() {
 	log("lua_setupvalue",		behind_lua_tolstring[2]);
 	log("lua_settop",			behind_lua_tolstring[3]);
 	log("lua_settable",			behind_lua_tolstring[4]);
-	std::vector<uint32_t>		after_lua_tolstring = getprologues(calls_gmatch_aux[0], behind, 4);
+	std::vector<uint32_t>		after_lua_tolstring = getprologues(calls_gmatch_aux[0], ahead, 4);
 	log("lua_tonumber",			after_lua_tolstring[0]);
 	log("lua_topointer",		after_lua_tolstring[1]);
 	log("lua_tostring",			after_lua_tolstring[2]);
