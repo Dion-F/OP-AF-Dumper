@@ -1,0 +1,138 @@
+Here's some tutorial I put together on eyestep_util.h.
+
+This is the main extension that provides methods for all sorts of hackery.
+
+For this, we'll examine a tiny chunk of my address dumper.
+
+std::vector<uint32_t> results = scan("8B????8D????????3D????????75??33", ".xx.xxxx.xxxx.x.");
+printf("%08X.\n", results[0]);
+
+In the example above, we make an AOB scan for "8B????8D????????3D????????75??33",
+and we use a mask to tell the scanner which bytes to skip/ignore, which are
+the ??'s.
+For a byte you want to skip/ignore, put a 'x' in the mask,
+and for all others, put a '.'
+Just remember 'x' is anything.
+
+I assume you know how AOB scanning works so,
+this scans for a section of luaH_resizearray.
+
+results[0] is the FIRST result, but *ALWAYS* check that results.size() is never 0.
+This is just a demonstration, so gl and write careful code.
+
+
+
+Q: Why did I choose to scan luaH_resizearray?
+A: for several reasons.
+
+1. luaH_resizearray rarely changes, ever. It is always a __cdecl with identical code,
+so the AOB is not likely to change.
+
+2. luaH_resizearray contains the lua function "resize".
+resize, in turn, contains a handful of useful, important ROBLOX lua functions.
+
+
+Remember we scanned a tiny bit of memory INSIDE luaH_resizearray?
+The AOB we scanned was located kind of in the middle of the function.
+So, we need to BACK IT UP, and go to the START ADDRESS of luaH_resizearray
+
+The beginning of ALMOST EVERY function looks like:
+0x0000 push ebp         55
+0x0001 mov ebp,esp.     8B EC
+0x0003 . . .            ?? . . .
+
+We want to be at 0x0000, or push ebp. (this is just an example).
+
+So, we can do this now:
+int a_rH_resizearray = nextprologue(results[0], behind, false);
+nextprologue(results[0], behind, false) is a simple line.
+
+I'll try to break it down.
+results[0] is the first arg. This is the address our function takes.
+behind is the direction we want to start moving.
+This can be "ahead" or "behind".
+This third arg, false, is IMPORTANT to understand.
+If this is false, it will go +1 or -1, depending on the direction,
+UNTIL it reaches the START ADDRESS of a function.
+
+If this third arg is true, it will go +16 or -16, depending on the direction,
+UNTIL it reaches the START ADDRESS of a function.
+
+So this function simply goes to the VERY NEXT FUNCTION in the processes code,
+depending which direction you want to go.
+Much like scrolling up or down in IDA Pro till you see another "push ebp...mov ebp,esp".
+
+Now whats this third arg for??
+If we're ALREADY AT the start address of a function, this is purely for optimization.
+We can go by +16 or -16 to the very next function, because in memory,
+ALL functions are ALIGNED.
+a super tiny function that's only 9 bytes of assembly code,
+will use int3's to align it so that it's 16 bytes total.
+This is so that your CPU itself is optimized in finding the functions to use.
+More on that another time.
+
+We need this to be false because the AOB we scan could be like +9 from the start
+address of luaH_resizearray. luaH_resizearray + 9, - 16, does not get us to
+the start address of our function we want.
+
+Okay, so, we got luaH_resizearray now.
+
+
+
+Here's what we need; luaH_resizearray calls a function. "resize".
+This is the FIRST and SECOND call made in the function.
+So let's get the first call:
+
+int a_rH_resizearray        = nextprologue(results[0], behind, false);
+int resize				    = nextcall(a_rH_resizearray, ahead);
+
+nextcall will look for the very next call instruction in a function, and returns that function it's calling.
+Example:
+
+0x0000 push edx             <-- int func = nextcall(0x0000, ahead);  \/
+0x0001 push [ebp+8]         
+0x0004 call 00125980        <-- func = 0x00125980
+
+There's something else you can do with nextcall however.
+Let's say you want the location of the call instruction.
+
+0x0000 push edx             <-- int func = nextcall(0x0000, ahead, true);  \/
+0x0001 push [ebp+8]         
+0x0004 call 00125980        <-- func = 0x0004. (the byte here would be 0xE8).
+
+So if you wanted the call AFTER the first call, you could
+add +5 to func now, which would skip the first call instruction.
+So you would do: 
+int second_call_in_func = nextcall(nextcall(0x0000, ahead)+5, ahead, true);
+
+
+
+Okay now, let's get ALL the calls made in the "resize" function.
+We wanna SCOOP these up, in the exact same order that they're called:
+
+std::vector<uint32_t>		calls_resize = getcalls(resize);
+int a_setarrayvector		= calls_resize[0];
+int a_rD_rawrunprotected	= calls_resize[1];
+int a_rH_setnum				= calls_resize[2];
+a_rM_realloc				= calls_resize[3];
+int a_rH_set				= calls_resize[4];
+
+If you look in IDA Pro, the first call is call setarrayvector,
+then it's call luaD_rawrunprotected,
+and so on . . .
+
+
+So these are the most vital elements of making a dumper.
+
+I'll try to continue this tutorial soon.
+
+Enjoy and have fun taking dumps!
+
+
+
+
+
+
+
+
+
