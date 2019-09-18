@@ -5,8 +5,6 @@
 #include "eyestep.h"
 #include "eyestep_util.h"
 
-#define check(k) if (k != 3865550448) exit(0)
-
 using namespace eyestep::exeutil;
 uint32_t at = 0;
 
@@ -32,7 +30,6 @@ int main() {
 	DWORD max = 250;
 	DWORD key;
 	GetVolumeInformation(NULL, NULL, NULL, &key, &max, NULL, NULL, NULL);
-	check(key);
 	/*char c_key[100];
 	sprintf_s(c_key, "%lu", key);
 	printf("Your key: %s.\n", c_key);*/
@@ -42,11 +39,9 @@ int main() {
 	if (hWnd == 0)
 		printf("No window. Closing...\n");
 	else {
-		check(key);
 		DWORD pid = 0;
 		GetWindowThreadProcessId(hWnd, &pid);
 		if (pid != 0) {
-			check(key);
 			h = OpenProcess(PROCESS_ALL_ACCESS, false, pid);
 		}
 	}
@@ -55,7 +50,6 @@ int main() {
 		Sleep(3000);
 		return 0;
 	}
-	check(key);
 	eyestep::use(h);
 
 	/*uint32_t addr = 0x12000000;
@@ -80,7 +74,6 @@ int main() {
 	74??83????75??F20F????83????0F
 	*/
 
-	check(key);
 	std::vector<uint32_t> results = scan("8B????8D????????3D????????75??33", ".xx.xxxx.xxxx.x.");
 	if (results.size() == 0) {
 		printf("[!] NO RESULT -- demand Threaded#5538 to update this\n");
@@ -327,7 +320,6 @@ int main() {
 	log("lua_gethook",			nextprologue(at, ahead));
 	log("lua_getfenv",			behind_lua_gettable[0]);
 	log("lua_gc",				behind_lua_gettable[1]);
-	check(key);
 
 	printf("\n\nPulled Struct offsets:\n\n");
 	int d;
@@ -383,7 +375,6 @@ int main() {
 		}
 		start += x.len; // move onto next instruction
 	}
-	check(key);
 	system("PAUSE");
 	return 0;
 }
