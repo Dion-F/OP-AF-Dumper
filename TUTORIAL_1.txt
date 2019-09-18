@@ -114,7 +114,7 @@ std::vector<uint32_t>		calls_resize = getcalls(resize);
 int a_setarrayvector		= calls_resize[0];
 int a_rD_rawrunprotected	= calls_resize[1];
 int a_rH_setnum				= calls_resize[2];
-a_rM_realloc				= calls_resize[3];
+int a_rM_realloc		 = calls_resize[3];
 int a_rH_set				= calls_resize[4];
 
 If you look in IDA Pro, the first call is call setarrayvector,
