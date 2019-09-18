@@ -1,5 +1,6 @@
 // rdumper.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
+#include "pch.h"
 #include <iostream>
 #include <string>
 #include "eyestep.h"
@@ -320,7 +321,7 @@ int main() {
 	log("lua_gethook",			nextprologue(at, ahead));
 	log("lua_getfenv",			behind_lua_gettable[0]);
 	log("lua_gc",				behind_lua_gettable[1]);
-
+	
 	printf("\n\nPulled Struct offsets:\n\n");
 	int d;
 
@@ -350,8 +351,8 @@ int main() {
 		if (strcmp(i.opcode, "add") == 0 && i.src.r32 == 0 && i.flags & Fl_dest_disp8) {
 			if (i.dest.disp8 < 0x7F && i.dest.disp8 > 0) {
 				// uvalue(obj)->metatable ((obj->value.gc)->u->uv->metatable)
-				if (d == 0) log("obj->value.u", i.dest.disp8);
-				if (d == 1) log("obj->value.h", i.dest.disp8);
+				if (d == 0) log("uvalue(obj)->metatable", i.dest.disp8);
+				if (d == 1) log("hvalue(obj)->metatable", i.dest.disp8);
 				d++;
 			}
 		}
@@ -375,6 +376,7 @@ int main() {
 		}
 		start += x.len; // move onto next instruction
 	}
+
 	system("PAUSE");
 	return 0;
 }
