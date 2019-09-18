@@ -7,16 +7,16 @@ Learn from the crappy code I wrote for this and have made 100x better(im not put
 Enjoy
 
 please note, if you get an error at this part of the code:
-<code>
-			uint32_t padding = (size - 1);
-			while (start < end){
-				bool read = pmread(handle, vcast(start), buffer, chunksize, 0);
-				if (read){
-					__asm push edi
-					__asm xor edi, edi
-					__asm jmp L2
-				L1: __asm inc edi
-</code>
+
+uint32_t padding = (size - 1);
+while (start < end){
+	bool read = pmread(handle, vcast(start), buffer, chunksize, 0);
+	if (read){
+		__asm push edi
+		__asm xor edi, edi
+		__asm jmp L2
+	L1: __asm inc edi
+
         
 it's due to a formatting issue.
 Just make sure that this:
