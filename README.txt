@@ -23,3 +23,6 @@ Just make sure that this:
 __asm xor edi, edi
 is NOT:
 __asmxor edi, edi
+
+
+also, running in release mode > debug mode, performance wise. jsyk
