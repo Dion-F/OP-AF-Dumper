@@ -350,8 +350,8 @@ int main() {
 		if (strcmp(i.opcode, "add") == 0 && i.src.r32 == 0 && i.flags & Fl_dest_disp8) {
 			if (i.dest.disp8 < 0x7F && i.dest.disp8 > 0) {
 				// uvalue(obj)->metatable ((obj->value.gc)->u->uv->metatable)
-				if (d == 0) log("uvalue(obj)->metatable", i.dest.disp8);
-				if (d == 1) log("hvalue(obj)->metatable", i.dest.disp8);
+				if (d == 0) log("obj->value.u", i.dest.disp8);
+				if (d == 1) log("obj->value.h", i.dest.disp8);
 				d++;
 			}
 		}
