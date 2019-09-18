@@ -117,16 +117,16 @@ int a_rH_setnum				= calls_resize[2];
 int a_rM_realloc		 = calls_resize[3];
 int a_rH_set				= calls_resize[4];
 
-If you look in IDA Pro, the first call is call setarrayvector,
-then it's call luaD_rawrunprotected,
+If you look in IDA Pro, the first call is for setarrayvector,
+then it makes a call to luaD_rawrunprotected,
 and so on . . .
 
 
-So these are the most vital elements of making a dumper.
+So, these are the most vital elements of making a dumper.
 
-I'll try to continue this tutorial soon.
+I'll try to continue with more tutorials soon.
 
-Enjoy and have fun taking dumps!
+Enjoy, and have fun making dumps! :poop:
 
 
 
