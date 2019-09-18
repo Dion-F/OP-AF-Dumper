@@ -84,7 +84,7 @@ This is the FIRST and SECOND call made in the function.
 So let's get the first call:
 
 int a_rH_resizearray        = nextprologue(results[0], behind, false);
-int resize				    = nextcall(a_rH_resizearray, ahead);
+int resize				= nextcall(a_rH_resizearray, ahead);
 
 nextcall will look for the very next call instruction in a function, and returns that function it's calling.
 Example:
@@ -96,14 +96,14 @@ Example:
 There's something else you can do with nextcall however.
 Let's say you want the location of the call instruction.
 
-0x0000 push edx             <-- int func = nextcall(0x0000, ahead, true);  \/
+0x0000 push edx             <-- int func = nextcall(0x0000, ahead, true);  \/ // we add "true". (this is false by default)
 0x0001 push [ebp+8]         
 0x0004 call 00125980        <-- func = 0x0004. (the byte here would be 0xE8).
 
 So if you wanted the call AFTER the first call, you could
 add +5 to func now, which would skip the first call instruction.
 So you would do: 
-int second_call_in_func = nextcall(nextcall(0x0000, ahead)+5, ahead, true);
+int second_call_in_func = nextcall(nextcall(0x0000, ahead, true)+5, ahead);
 
 
 
